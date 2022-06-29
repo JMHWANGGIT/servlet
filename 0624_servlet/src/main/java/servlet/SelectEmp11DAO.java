@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SelectEmp11DAO {
 	
@@ -25,16 +26,44 @@ public class SelectEmp11DAO {
 		}//catch
 	}//constructor
 	
-	public void selectEmp() {
+	
+	
+	public ArrayList<SelectEmp11DTO> selectEmp() {
+		
+		ArrayList<SelectEmp11DTO> list = new ArrayList<SelectEmp11DTO>();
+		
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			stmt = con.createStatement();
-			String sql = "select empno, ename, job, mgr, hiredate, sal, comm, deptno, from emp";
+			String sql = "select empno, ename, job, mgr, hiredate, sal, comm, deptno from emp";
+			rs = stmt.executeQuery(sql);
 			
+			while(rs.next()) {
+				SelectEmp11DTO dto = new SelectEmp11DTO();
+				dto.setEmpno(rs.getString("empno"));
+				dto.setEname(rs.getString("ename"));
+				dto.setJob(rs.getString("job"));
+				dto.setMgr(rs.getString("mgr"));
+				dto.setHiredate(rs.getString("hiredate"));
+				dto.setSal(rs.getString("sal"));
+				dto.setComm(rs.getString("comm"));
+				dto.setDeptno(rs.getString("deptno"));
+				list.add(dto);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}//finally
+		return list;
+		
 	}//selectEmp
 }//SelectEmp11DAO

@@ -1,6 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +31,27 @@ public class SelectEmp11 extends HttpServlet {
     }//init - 최초의 1번만 수행 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		﻿dao.selectEmp();
+		
+		PrintWriter out = response.getWriter();
+		out.print("<table border=1><tbody>");
+		
+		ArrayList<SelectEmp11DTO> list = dao.selectEmp();
+		for(int i=0; i<list.size(); i++) {
+			SelectEmp11DTO tmpDTO = list.get(i);
+			out.print("<tr>");
+			out.print("<td>" + tmpDTO.getEmpno() + "</td>");
+			out.print("<td>" + tmpDTO.getEname() + "</td>");
+			out.print("<td>" + tmpDTO.getJob() + "</td>");
+			out.print("<td>" + tmpDTO.getMgr() + "</td>");
+			out.print("<td>" + tmpDTO.getHiredate() + "</td>");
+			out.print("<td>" + tmpDTO.getSal() + "</td>");
+			out.print("<td>" + tmpDTO.getComm() + "</td>");
+			out.print("<td>" + tmpDTO.getDeptno() + "</td>");
+			out.print("</tr>");
+		}
+		
+		out.print("</table></tbody>");
+		out.close();
 		
 	}//doGet
 
