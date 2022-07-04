@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>12submit_js_jq.html</title>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	</head>
+	<body>
+	
+		<h1> 로 그 인 - js와 jq를 통해 form의 action과 method를 지정해보자 </h1>
+		
+		<form id="form1">
+			<br>id : <input type="text" id="mid1" name="mid1" > 
+			<br>password: <input type="password" id="mpwd1" name="mpwd1">
+			<br><button type="button" id="btn1" onclick="jsLogin();"> JavaScript SEND </button>
+			<br><button type="button" id="btn2"> JQuery SEND </button>
+		</form>
+		
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btn2").click(function() {
+				if( $.trim( $("#mid1").val()) == "" ){
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				if( $.trim( $("#mpwd1").val()) == "" ){
+					alert("패스워드를 입력하세요");
+					return;
+				}
+				$("#form1").attr("method","post");
+				$("#form1").attr("action","http://localhost:8080/0624_servlet/SubmitTest12");
+				alert($("#form1").attr("method"));
+				alert($("#form1").attr("action"));
+				$("#form1").submit();
+			});//click
+		});//ready
+		
+		</script>
+		
+		<script type="text/javascript">
+		function jsLogin() {//validation check : server로 input 하는 데이터가 올바른 데이터인지 확인하는 과정 
+			if( mid1.value.trim() == "" ){
+				alert("아이디를 입력하세요.");
+				return;
+			}
+			if( mpwd1.value.trim() == "" ){
+				alert("패스워드를 입력하세요.");
+				return;
+			}
+			form1.action = "http://localhost:8080/0624_servlet/SubmitTest12";
+			form1.method = "post";
+			alert(form1.action);
+			alert(form1.method);
+			form1.submit();
+			//form.submit이 최종 목적! 
+		}//jsLogin
+		</script>
+		
+	</body>
+</html>

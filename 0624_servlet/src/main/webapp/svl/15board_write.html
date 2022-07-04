@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>15board_write.html</title>
+	</head>
+	<body>
+		<h1>자 유 게 시 판</h1>
+		<form id="form1"  method="post"
+			action="http://localhost:8080/0624_servlet/Board15">
+			<input type="hidden" id="cmd" name="cmd" value="reg">
+			<br><br>
+			제목 : <input type="text" id="title" name="title" maxlength="50">
+			<br><br>
+			작성자 : <input type="text" id="writer" name="writer" maxlength="20"> 
+			<br><br>
+			내용 : <textarea rows="10" cols="30" name="cnts" maxlength="500"></textarea>
+			<br><br>
+			<button type="submit">글 등 록</button>
+		</form>
+	</body>
+</html>
